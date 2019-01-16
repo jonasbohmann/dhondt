@@ -4,6 +4,8 @@ def main():
     print("==== D'HONDT CALCULATOR ====")
 
     seats = int(input("How many seats are up for election?\n"))
+    
+    amountOfParties = int(input("How many parties participated in the election?\n"))
 
     print("Enter the amount of votes each party received.")
 
@@ -13,7 +15,7 @@ def main():
 
     votes = {"CDU": votesCDU, "SPD": votesSPD, "FDP": votesFDP}
 
-    round = 0
+
     allocatedSeats = 0
     seatsCDU = 0
     seatsSPD = 0
@@ -27,7 +29,7 @@ def main():
     while allocatedSeats < seats:
         winner = max(votes.values())
         winnerKey = [key for (key, value) in votes.items() if value == winner]
-        print(str(winnerKey) + " wins round " + str(round))
+        print(str(winnerKey) + " wins seat #" + str(allocatedSeats+1))
 
         if winnerKey == ['CDU']:
             seatsCDU += 1
@@ -46,12 +48,10 @@ def main():
 
         # Tie "Breaker", aber nicht wirklich
         # Ich wusste nicht wie ich den Sitz losen konnte
-        if qCDU == qSPD or qCDU == qFDP or qSPD == qFDP:
-            print("ERROR!  -  There appears to be a tie between at least 2 parties in the calculation of the quota. As "
-                  "such, the seat of this round will not be allocted.")
+        if len(winnerKey) > 1:
+            print("ERROR!  -  There appears to be a tie between at least 2 parties in the calculation of seat #" + str(allocatedSeats+1))
 
         allocatedSeats += 1
-        round += 1
 
     print("\n==== RESULTS ====")
     print("Amount of seats for the CDU: " + str(seatsCDU))
