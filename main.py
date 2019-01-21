@@ -1,62 +1,35 @@
 # ======== D'hondt calculator ========
 def main():
+    quota = {}
+    wonSeats = {}
+    votes = {}
+    allocatedSeats = 0
 
     print("==== D'HONDT CALCULATOR ====")
-
     seats = int(input("How many seats are up for election?\n"))
-    
     amountOfParties = int(input("How many parties participated in the election?\n"))
 
-    print("Enter the amount of votes each party received.")
+    for x in range(amountOfParties):
+        party = str(input("Name of Party: "))
+        inputVotes = int(input("Amount of Votes for " + party + ": "))
+        quota[party] = inputVotes
+        votes[party] = inputVotes
+        wonSeats[party] = 0
 
-    votesCDU = int(input("CDU: "))
-    votesSPD = int(input("SPD: "))
-    votesFDP = int(input("FDP: "))
-
-    votes = {"CDU": votesCDU, "SPD": votesSPD, "FDP": votesFDP}
-
-
-    allocatedSeats = 0
-    seatsCDU = 0
-    seatsSPD = 0
-    seatsFDP = 0
-    qCDU = 0
-    qSPD = 0
-    qFDP = 0
 
     print("\n==== CALCULATION ====")
-
     while allocatedSeats < seats:
-        winner = max(votes.values())
-        winnerKey = [key for (key, value) in votes.items() if value == winner]
-        print(str(winnerKey) + " wins seat #" + str(allocatedSeats+1))
-
-        if winnerKey == ['CDU']:
-            seatsCDU += 1
-            qCDU = votesCDU / (seatsCDU + 1)
-            votes["CDU"] = qCDU
-
-        if winnerKey == ['SPD']:
-            seatsSPD += 1
-            qSPD = votesSPD / (seatsSPD + 1)
-            votes["SPD"] = qSPD
-
-        if winnerKey == ['FDP']:
-            seatsFDP += 1
-            qFDP = votesFDP / (seatsFDP + 1)
-            votes["FDP"] = qFDP
-
-        # Tie "Breaker", aber nicht wirklich
-        # Ich wusste nicht wie ich den Sitz losen konnte
-        if len(winnerKey) > 1:
-            print("ERROR!  -  There appears to be a tie between at least 2 parties in the calculation of seat #" + str(allocatedSeats+1))
-
+        winner = max(quota.values())
+        winnerKeys = [key for (key, value) in quota.items() if value == winner]
+        winnerKey = winnerKeys[0]
+        print(str(winnerKey) + " wins seat #" + str(allocatedSeats + 1))
+        wonSeats[winnerKey] = wonSeats[winnerKey] + 1
+        quota[winnerKey] = votes[winnerKey] / (wonSeats[winnerKey] + 1)
         allocatedSeats += 1
 
     print("\n==== RESULTS ====")
-    print("Amount of seats for the CDU: " + str(seatsCDU))
-    print("Amount of seats for the SPD: " + str(seatsSPD))
-    print("Amount of seats for the FDP: " + str(seatsFDP))
+    for key in wonSeats:
+        print("Amount of seats for %s: %s" % (key, wonSeats[key]))
 
 
 if __name__ == "__main__":
