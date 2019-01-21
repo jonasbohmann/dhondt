@@ -60,6 +60,9 @@ def main():
     for key in wonSeats:
         print("Amount of seats for %s: %s" % (key, wonSeats[key]))
 
+    print("\nThe program will quit after 10 seconds.")
+    time.sleep(10)
+    quit()
 
 if __name__ == "__main__":
     main()
