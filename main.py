@@ -1,20 +1,49 @@
 # ======== D'hondt calculator ========
+import time
+
 def main():
+
     quota = {}
-    wonSeats = {}
     votes = {}
+    wonSeats = {}
     allocatedSeats = 0
 
     print("==== D'HONDT CALCULATOR ====")
-    seats = int(input("How many seats are up for election?\n"))
-    amountOfParties = int(input("How many parties participated in the election?\n"))
+
+
+    try:
+        seats = int(input("How many seats are up for election?\n"))
+    except ValueError:
+        print("The amount of seats has to be a positive integer.\nThe program will now quit.")
+        time.sleep(3)
+        quit()
+
+    try:
+        amountOfParties = int(input("How many parties participated in the election?\n"))
+    except ValueError:
+        print("The amount of parties has to be a positive integer.\nThe program will now quit. ")
+        time.sleep(3)
+        quit()
 
     for x in range(amountOfParties):
-        party = str(input("Name of Party: "))
-        inputVotes = int(input("Amount of Votes for " + party + ": "))
+        try:
+            party = str(input("Name of Party: "))
+        except ValueError:
+            print("The name of a party has cannot be empty.\nThe program will now quit.")
+            time.sleep(3)
+            quit()
+
+        try:
+            inputVotes = int(input("Amount of Votes for " + party + ": "))
+        except ValueError:
+            print("The amount of votes of a party has to be a positive integer.\nThe program will now quit.")
+            time.sleep(3)
+            quit()
+
         quota[party] = inputVotes
         votes[party] = inputVotes
         wonSeats[party] = 0
+
 
 
     print("\n==== CALCULATION ====")
