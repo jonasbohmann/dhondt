@@ -30,7 +30,7 @@ def main():
             break
 
         except ValueError:
-            print("The amount of seats has to be a positive integer!")
+            print("Enter either '1', '2', or '3'!")
 
     while True:
         try:
