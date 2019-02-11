@@ -14,7 +14,7 @@ First, enter the method you want to calculate with. You can choose between:
 * [Saint-Laguë/Webster](https://en.wikipedia.org/wiki/Webster/Sainte-Lagu%C3%AB_method)
 * [Hare-Niemeyer](https://en.wikipedia.org/wiki/Largest_remainder_method)
 
-Then, enter the amount of seats, the amount of parties and their respective name & amount of votes to calculate the seat distribution with your specifed method.
+Then, enter the amount of seats, the amount of parties and their respective name & amount of votes to calculate the seat distribution with your specified method.
 
 There is no limit on the amount of seats nor on the amount of parties.
 
