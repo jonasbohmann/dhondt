@@ -67,7 +67,10 @@ def main():
         allVotes = allVotes + inputVotes
         quota[party] = inputVotes
         votes[party] = inputVotes
-        wonSeats[party] = 0
+
+        # This needs to be initialized as 1 for every party to give the right results If it starts at 0, the first
+        # party to win a seat wins two because the quota will get updated after they've won their first seat
+        wonSeats[party] = 1
 
     allocatedSeats = 0
 
@@ -105,7 +108,8 @@ def main():
 
     print("\n==== RESULTS ====")
     for key in wonSeats:
-        print("Amount of seats for %s: %s" % (key, wonSeats[key]))
+        # See comment @ line 71: wonSeats - 1 because we started counting at 1
+        print("Amount of seats for %s: %s" % (key, (wonSeats[key]-1)))
 
     # For windows users who use the python launcher
     x = input("\nPress 'ENTER' to exit... ")
