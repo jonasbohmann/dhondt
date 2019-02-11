@@ -21,3 +21,7 @@ There is no limit on the amount of seats nor on the amount of parties.
 
 ## Requirements
 * [Python 3.7](https://www.python.org/downloads/)
+
+## For Windows Users
+Download "proportional-representation.exe", then run it as you would use any other program.
+You do not have to install Python first, as the Python 3.7 libraries are packed into the .exe.
