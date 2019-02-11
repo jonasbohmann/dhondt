@@ -24,13 +24,17 @@ def main():
 
     while True:
         try:
-            print("What method do you want to use?\n(1) - D'Hondt\n(2) - Sainte-Laguë/Webster\n(3) - "
-                      "Hare-Niemeyer\n")
+            print("\nWhat method do you want to use?\n(1) - D'Hondt\n(2) - Sainte-Laguë/Webster\n(3) - "
+                  "Hare-Niemeyer\n")
             method = int(input("Enter either '1', '2', or '3':\n"))
-            break
+
+            if method in range(1, 4):
+                break
+            else:
+                print("You have to enter either '1', '2', or '3'!")
 
         except ValueError:
-            print("Enter either '1', '2', or '3'!")
+            print("You have to nter either '1', '2', or '3'!")
 
     while True:
         try:
@@ -59,8 +63,8 @@ def main():
         while True:
             try:
                 inputVotes = int(input("Amount of Votes for " + party + ": "))
-
                 break
+
             except ValueError:
                 print("The amount of votes of a party has to be a positive integer!")
 
@@ -82,6 +86,10 @@ def main():
         # If there's a tie between the quotas of at least 2 parties, the seat goes to the first party
         winnerKey = winnerKeys[0]
 
+        # Result output
+        print(str(winnerKey) + " wins seat #" + str(allocatedSeats + 1) + " with the highest quota of " + str(
+            quota[winnerKey]))
+
         # Calculation based on method
         if method == 1:
             dhondt(winnerKey)
@@ -97,10 +105,6 @@ def main():
             print("WARNING! - There was a tie between " + str(winnerKeys) + ". The seat went to the party that you "
                                                                             "entered first in the beginning.")
 
-        # Result output
-        print(str(winnerKey) + " wins seat #" + str(allocatedSeats + 1) + " with the highest quota of " + str(
-            quota[winnerKey]))
-
         # Give seat to winner & calculate new quota
         wonSeats[winnerKey] = wonSeats[winnerKey] + 1
         # quota[winnerKey] = votes[winnerKey] / (wonSeats[winnerKey] + 1)
@@ -109,7 +113,7 @@ def main():
     print("\n==== RESULTS ====")
     for key in wonSeats:
         # See comment @ line 71: wonSeats - 1 because we started counting at 1
-        print("Amount of seats for %s: %s" % (key, (wonSeats[key]-1)))
+        print("Amount of seats for %s: %s" % (key, (wonSeats[key] - 1)))
 
     # For windows users who use the python launcher
     x = input("\nPress 'ENTER' to exit... ")
