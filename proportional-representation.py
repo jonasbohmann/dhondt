@@ -1,4 +1,5 @@
 # ======== Proportional Representation Calculator ========
+import math
 
 quota = {}
 votes = {}
@@ -8,6 +9,10 @@ allocatedSeats = 0
 
 
 def dhondt(winner):
+    quota[winner] = math.floor(votes[winner] / (wonSeats[winner] + 1))
+
+
+def altdhondt(winner):
     quota[winner] = votes[winner] / (wonSeats[winner] + 1)
 
 
@@ -24,17 +29,17 @@ def main():
 
     while True:
         try:
-            print("\nWhat method do you want to use?\n(1) - D'Hondt\n(2) - Sainte-Laguë/Webster\n(3) - "
-                  "Hare-Niemeyer\n")
-            method = int(input("Enter either '1', '2', or '3':\n"))
+            print("\nWhat method do you want to use?\n(1) - D'Hondt\n(2) - Alternative D'Hondt (Without Rounding)\n(3) - "
+                  "Hare-Niemeyer\n(4) - Sainte-Laguë/Webster\n")
+            method = int(input("Enter either '1', '2', '3' or '4':\n"))
 
-            if method in range(1, 4):
+            if method in range(1, 5):
                 break
             else:
-                print("You have to enter either '1', '2', or '3'!")
+                print("You have to enter either '1', '2', '3' or '4'!")
 
         except ValueError:
-            print("You have to nter either '1', '2', or '3'!")
+            print("You have to enter either '1', '2', '3' or '4'!")
 
     while True:
         try:
@@ -95,10 +100,14 @@ def main():
             dhondt(winnerKey)
 
         if method == 2:
-            websterSainteLague(winnerKey)
+            altdhondt(winnerKey)
 
         if method == 3:
             hareNiemeyer(winnerKey, allVotes, seats)
+
+        if method == 4:
+            websterSainteLague(winnerKey)
+
 
         # Gives out warning if there's a tie between at least 2 quotas in the calculation
         if len(winnerKeys) > 1:
