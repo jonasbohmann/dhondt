@@ -61,9 +61,13 @@ def main():
         while True:
             try:
                 party = str(input("Name of Party #" + str(x + 1) + ": "))
-                break
+                if not party in quota:
+                    break
+                else:
+                    print("The name of a party must be unique!")
+            
             except ValueError:
-                print("The name of a party has cannot be empty!")
+                print("The name of a party cannot be empty!")
 
         while True:
             try:
