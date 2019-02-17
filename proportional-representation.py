@@ -120,7 +120,6 @@ def main():
 
         # Give seat to winner & calculate new quota
         wonSeats[winnerKey] = wonSeats[winnerKey] + 1
-        # quota[winnerKey] = votes[winnerKey] / (wonSeats[winnerKey] + 1)
         allocatedSeats += 1
 
     print("\n==== RESULTS ====")
